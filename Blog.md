@@ -7,6 +7,7 @@
 ### a) From DRY to Design Patterns (6 marks)
 
 [Link to your merge request](/put/links/here)
+<!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
 
 > 1. Look inside src/main/java/dungeonmania/entities/enemies. Where can you notice an instance of repeated code? Note down the particular offending lines/methods/fields.
 
@@ -23,6 +24,7 @@
 ### b) Inheritance Design (6 marks)
 
 [Link to your merge request](/put/links/here)
+<!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
 
 > 1. List one design principle that is violated by collectable objects based on the description above. Briefly justify your answer.
 
@@ -35,6 +37,7 @@
 ### c) Open-Closed Goals (6 marks)
 
 [Link to your merge request](/put/links/here)
+<!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
 
 > 1. Do you think the design is of good quality here? Do you think it complies with the open-closed principle? Do you think the design should be changed?
 
@@ -47,10 +50,12 @@
 ### d) Open Refactoring (12 marks)
 
 [Merge Request 1](/put/links/here)
+<!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
 
 [Briefly explain what design choices you made]
 
 [Merge Request 2](/put/links/here)
+<!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
 
 [Briefly explain what design choices you made]
 
@@ -65,6 +70,7 @@ Add all other changes you made in the same format here:
 ### [Option A]: Sun Stone & More Buildables (20 marks)
 
 [Links to your merge requests](/put/links/here)
+<!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
 
 **Design Decisions**
 
@@ -77,6 +83,7 @@ Add all other changes you made in the same format here:
 ### [Option B]: Logic Switches (30 marks)
 
 [Links to your merge requests](/put/links/here)
+<!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
 
 **Design Decisions**
 
