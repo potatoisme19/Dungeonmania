@@ -8,20 +8,26 @@ import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
-public class Sword extends InventoryItem implements Useable {
+public class Sword extends InventoryItem implements Useable, BattleItem, DurableItem {
     public static final double DEFAULT_ATTACK = 1;
     public static final double DEFAULT_ATTACK_SCALE_FACTOR = 1;
     public static final int DEFAULT_DURABILITY = 5;
     public static final double DEFAULT_DEFENCE = 0;
     public static final double DEFAULT_DEFENCE_SCALE_FACTOR = 1;
 
-    private int durability;
+    private DurabilityHelper durability;
     private double attack;
+
+    @Override
+    public void useDurability(Game game) {
+        use(game);
+
+    }
 
     public Sword(Position position, double attack, int durability) {
         super(position);
         this.attack = attack;
-        this.durability = durability;
+        this.durability = new DurabilityHelper(durability, this);
     }
 
     @Override
@@ -40,10 +46,7 @@ public class Sword extends InventoryItem implements Useable {
 
     @Override
     public void use(Game game) {
-        durability--;
-        if (durability <= 0) {
-            game.getPlayer().remove(this);
-        }
+        durability.decrement(game);
     }
 
     @Override
@@ -53,6 +56,6 @@ public class Sword extends InventoryItem implements Useable {
 
     @Override
     public int getDurability() {
-        return durability;
+        return durability.getDurability();
     }
 }

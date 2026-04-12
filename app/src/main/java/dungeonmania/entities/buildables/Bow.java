@@ -2,22 +2,28 @@ package dungeonmania.entities.buildables;
 
 import dungeonmania.Game;
 import dungeonmania.battles.BattleStatistics;
+import dungeonmania.entities.collectables.BattleItem;
+import dungeonmania.entities.collectables.DurabilityHelper;
+import dungeonmania.entities.collectables.DurableItem;
 import dungeonmania.entities.collectables.Useable;
 
-public class Bow extends Buildable implements Useable {
-    private int durability;
+public class Bow extends Buildable implements Useable, BattleItem, DurableItem {
+    private DurabilityHelper durability;
 
     public Bow(int durability) {
         super(null);
-        this.durability = durability;
+        this.durability = new DurabilityHelper(durability, this);
     }
 
     @Override
     public void use(Game game) {
-        durability--;
-        if (durability <= 0) {
-            game.getPlayer().remove(this);
-        }
+        durability.decrement(game);
+    }
+
+    @Override
+    public void useDurability(Game game) {
+        use(game);
+
     }
 
     @Override
@@ -27,6 +33,6 @@ public class Bow extends Buildable implements Useable {
 
     @Override
     public int getDurability() {
-        return durability;
+        return durability.getDurability();
     }
 }

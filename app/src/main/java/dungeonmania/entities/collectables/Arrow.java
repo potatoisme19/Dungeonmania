@@ -7,7 +7,7 @@ import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
-public class Arrow extends InventoryItem {
+public class Arrow extends InventoryItem implements BattleItem {
     public Arrow(Position position) {
         super(position);
     }
@@ -23,11 +23,7 @@ public class Arrow extends InventoryItem {
 
     @Override
     public BattleStatistics applyBuff(BattleStatistics origin) {
-        return BattleStatistics.applyBuff(origin, new BattleStatistics(0, 0, 0, 1, 1, false, false));
+        return origin;
     }
 
-    @Override
-    public int getDurability() {
-        return Integer.MAX_VALUE;
-    }
 }

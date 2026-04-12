@@ -3,23 +3,23 @@ package dungeonmania.entities.buildables;
 import dungeonmania.Game;
 import dungeonmania.battles.BattleStatistics;
 import dungeonmania.entities.collectables.Useable;
+import dungeonmania.entities.collectables.BattleItem;
+import dungeonmania.entities.collectables.DurabilityHelper;
+import dungeonmania.entities.collectables.DurableItem;
 
-public class Shield extends Buildable implements Useable {
-    private int durability;
+public class Shield extends Buildable implements Useable, BattleItem, DurableItem {
+    private DurabilityHelper durability;
     private double defence;
 
     public Shield(int durability, double defence) {
         super(null);
-        this.durability = durability;
+        this.durability = new DurabilityHelper(durability, this);
         this.defence = defence;
     }
 
     @Override
     public void use(Game game) {
-        durability--;
-        if (durability <= 0) {
-            game.getPlayer().remove(this);
-        }
+        durability.decrement(game);
     }
 
     @Override
@@ -29,7 +29,12 @@ public class Shield extends Buildable implements Useable {
 
     @Override
     public int getDurability() {
-        return durability;
+        return durability.getDurability();
+    }
+
+    @Override
+    public void useDurability(Game game) {
+        use(game);
     }
 
 }
