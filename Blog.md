@@ -44,16 +44,16 @@ Now new items can implement only the roles they need and there is clear intent f
 
 ### c) Open-Closed Goals (6 marks)
 
-[Link to your merge request](/put/links/here)
+[Link to your merge request](https://gitlab.cse.unsw.edu.au/coursework/COMP2511/26T1/students/z5606467/assignment-ii-part-1/-/merge_requests/4)
 <!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
 
 > 1. Do you think the design is of good quality here? Do you think it complies with the open-closed principle? Do you think the design should be changed?
 
-[Answer]
+I think it violates open /closed principle because if I have to add a new goal I will have to add a new case statement in the code, which it modifying it. 
 
 > 2. If you think the design is sufficient as it is, justify your decision. If you think the answer is no, pick a suitable Design Pattern that would improve the quality of the code and refactor the code accordingly.
 
-[Briefly justify your decision OR explain your design choices]
+I will use a composite pattern where the leaf nodes are the goals (exit, boulders, treasure) and the composite node is the operation (AND/OR) 
 
 ### d) Open Refactoring (12 marks)
 
