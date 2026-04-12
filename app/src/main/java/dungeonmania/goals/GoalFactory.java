@@ -10,7 +10,7 @@ public class GoalFactory {
             case "AND" -> {
                 subgoals = jsonGoal.getJSONArray("subgoals");
                 yield new AndGoal(createGoal(subgoals.getJSONObject(0), config),
-                        createGoal(subgoals.getJSONObject(0), config));
+                        createGoal(subgoals.getJSONObject(1), config));
             }
             case "OR" -> {
                 subgoals = jsonGoal.getJSONArray("subgoals");
