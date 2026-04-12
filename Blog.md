@@ -6,7 +6,7 @@
 
 ### a) From DRY to Design Patterns (6 marks)
 
-[Link to your merge request](/put/links/here)
+[Link to your merge request](https://gitlab.cse.unsw.edu.au/coursework/COMP2511/26T1/students/z5606467/assignment-ii-part-1/-/merge_requests/2)
 <!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
 
 > 1. Look inside src/main/java/dungeonmania/entities/enemies. Where can you notice an instance of repeated code? Note down the particular offending lines/methods/fields.
