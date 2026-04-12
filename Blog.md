@@ -27,7 +27,7 @@ I will use a stratrgy pattern to handle the movement logic. Strategy pattern is 
 
 ### b) Inheritance Design (6 marks)
 
-[Link to your merge request](/put/links/here)
+[Link to your merge request](https://gitlab.cse.unsw.edu.au/coursework/COMP2511/26T1/students/z5606467/assignment-ii-part-1/-/merge_requests/3)
 <!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
 
 > 1. List one design principle that is violated by collectable objects based on the description above. Briefly justify your answer.
