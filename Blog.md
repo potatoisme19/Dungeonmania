@@ -11,15 +11,19 @@
 
 > 1. Look inside src/main/java/dungeonmania/entities/enemies. Where can you notice an instance of repeated code? Note down the particular offending lines/methods/fields.
 
-[Answer]
+My main focus is on the long logic in move() for the subclasses. 
+1) In Merceenary line 124 - 156 (invincible case) and ZombieToast lines 40 - 72 (runAway case) both contain identical logic for calculating flee direction from the player. 
+2) In Mercenary lines 102 - 113 (invisible case) and ZombieToast lines 27 - 35 (random case) both contain identical random movement logic.
 
 > 2. What Design Pattern could be used to improve the quality of the code and avoid repetition? Justify your choice by relating the scenario to the key characteristics of your chosen Design Pattern.
 
-[Answer]
+I will use a stratrgy pattern to handle the movement logic. Strategy pattern is good to store different algorithms that can used based on different conditions. This can de-clutter the conditional logic in move() as I separate the movement logics from the enemy characteristics. It is open to extension, closed to modification as adding a new movement type wont change the existing enemy classes. It also increases reusability as I am reusing logics to different classes. 
 
 > 3. Using your chosen Design Pattern, refactor the code to remove the repetition.
 
-[Briefly explain what design choices you made]
+1) create a movement strategy interface 
+2) implement different concrete strategies for movement strategy (hostile, random, flee, allied)
+3) update existing classes to use movement strategy pattern 
 
 ### b) Inheritance Design (6 marks)
 
