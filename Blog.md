@@ -32,11 +32,15 @@ I will use a stratrgy pattern to handle the movement logic. Strategy pattern is 
 
 > 1. List one design principle that is violated by collectable objects based on the description above. Briefly justify your answer.
 
-[Answer]
+Liskov's Substitution principle is violated because subclass wood and treasure implement applyBuff() and getDurability() with a placeholder behaviour, which is false because it should not have this characteristic to begin with.
 
 > 2. Refactor the inheritance structure of the code, and in the process remove the design principle violation you identified.
 
-[Briefly explain what design choices you made]
+1) add 2 new interface: BattleItem and DurableItem (both are characteristics of an item, like useable)
+2) refactor all inventory items to implement respective needed characteristics 
+3) update inventory class to handle new interfaces
+
+Now new items can implement only the roles they need and there is clear intent for each interface. 
 
 ### c) Open-Closed Goals (6 marks)
 

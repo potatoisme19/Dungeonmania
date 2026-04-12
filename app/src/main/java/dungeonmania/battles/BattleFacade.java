@@ -8,6 +8,7 @@ import dungeonmania.Game;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.buildables.*;
+import dungeonmania.entities.collectables.BattleItem;
 import dungeonmania.entities.collectables.Sword;
 import dungeonmania.entities.collectables.Useable;
 import dungeonmania.entities.collectables.potions.Potion;
@@ -40,7 +41,7 @@ public class BattleFacade {
 
         for (InventoryItem item : player.getInventory().getEntities(InventoryItem.class)) {
             if (item instanceof Bow || item instanceof Shield || item instanceof Sword) {
-                playerBuff = item.applyBuff(playerBuff);
+                playerBuff = ((BattleItem) item).applyBuff(playerBuff);
                 battleItems.add(item);
                 ((Useable) item).use(game);
             }

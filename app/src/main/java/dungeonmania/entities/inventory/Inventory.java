@@ -9,6 +9,7 @@ import dungeonmania.entities.EntityFactory;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.buildables.Bow;
 import dungeonmania.entities.collectables.Arrow;
+import dungeonmania.entities.collectables.BattleItem;
 import dungeonmania.entities.collectables.Key;
 import dungeonmania.entities.collectables.Sword;
 import dungeonmania.entities.collectables.Treasure;
@@ -160,6 +161,13 @@ public class Inventory {
         if (weapon == null)
             return getFirst(Bow.class);
         return weapon;
+    }
+
+    public List<BattleItem> getBattleItems() {
+        return items.stream()
+                .filter(item -> item instanceof BattleItem)
+                .map(item -> (BattleItem) item)
+                .collect(Collectors.toList());
     }
 
 }
