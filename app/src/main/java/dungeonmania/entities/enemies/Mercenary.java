@@ -26,10 +26,8 @@ public class Mercenary extends Enemy implements Interactable, PotionListener {
     private double allyAttack;
     private double allyDefence;
     private boolean allied = false;
-    //private boolean wasAdjacentToPlayer = false;
 
     /** Type of movement to use */
-    //private String movementType = "hostile";
 
     public Mercenary(Position position, double health, double attack, int bribeAmount, int bribeRadius,
             double allyAttack, double allyDefence) {
