@@ -145,7 +145,7 @@ public class GameMap {
     private void triggerMovingAwayEvent(Entity entity) {
         List<Runnable> callbacks = new ArrayList<>();
         getEntities(entity.getPosition()).forEach(e -> {
-            if (e != entity)
+            if (e != entity && e instanceof MoveAway)
                 callbacks.add(() -> ((MoveAway) e).onMovedAway(this, entity));
         });
         callbacks.forEach(callback -> {
@@ -161,7 +161,7 @@ public class GameMap {
     private void triggerOverlapEvent(Entity entity) {
         List<Runnable> overlapCallbacks = new ArrayList<>();
         getEntities(entity.getPosition()).forEach(e -> {
-            if (e != entity)
+            if (e != entity && e instanceof Overlappable)
                 overlapCallbacks.add(() -> ((Overlappable) e).onOverlap(this, entity));
         });
         overlapCallbacks.forEach(callback -> {
