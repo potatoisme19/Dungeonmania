@@ -54,8 +54,4 @@ public class Door extends Entity implements Overlappable {
         open = true;
     }
 
-    @Override
-    public void onDestroy(GameMap gameMap) {
-        return;
-    }
 }

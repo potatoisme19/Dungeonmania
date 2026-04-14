@@ -17,9 +17,4 @@ public abstract class InventoryItem extends Entity {
         return true;
     }
 
-    @Override
-    public void onDestroy(GameMap gameMap) {
-        return;
-    }
-
 }

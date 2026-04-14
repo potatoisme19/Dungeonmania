@@ -64,8 +64,4 @@ public class Switch extends Entity implements Overlappable, MoveAway {
         return activated;
     }
 
-    @Override
-    public void onDestroy(GameMap gameMap) {
-        return;
-    }
 }

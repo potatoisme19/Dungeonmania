@@ -71,8 +71,12 @@ because i think getEntityFacotry() and getZombieFactory() both return factory an
 
 - I created Overlappable interface so that it is no longer a part of entity since sometimes an entity will not implement it. 
 - I create MoveAway interface for the same reason. 
+- I created Destroy interface for the same reason. 
 
-Add all other changes you made in the same format here:
+[Merge Request 3](/put/links/here)
+<!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
+
+[explain here]
 
 ## Task 2) Evolution of Requirements 🔧
 

@@ -72,9 +72,6 @@ public abstract class Entity {
         this.position = Position.translateBy(this.position, offset);
     }
 
-    /** Called when this entity is destroyed (ie removed from the game map). */
-    public abstract void onDestroy(GameMap gameMap);
-
     /** Current position of the entity */
     public Position getPosition() {
         return position;

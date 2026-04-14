@@ -13,8 +13,4 @@ public class Exit extends Entity {
         return true;
     }
 
-    @Override
-    public void onDestroy(GameMap gameMap) {
-        return;
-    }
 }

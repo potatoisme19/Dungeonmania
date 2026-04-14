@@ -37,8 +37,4 @@ public class Boulder extends Entity implements Overlappable {
         return true;
     }
 
-    @Override
-    public void onDestroy(GameMap gameMap) {
-        return;
-    }
 }
