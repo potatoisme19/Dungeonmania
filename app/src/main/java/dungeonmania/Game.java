@@ -6,12 +6,12 @@ import java.util.UUID;
 
 import dungeonmania.battles.BattleFacade;
 import dungeonmania.entities.Entity;
-import dungeonmania.entities.EntityFactory;
 import dungeonmania.entities.Interactable;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.collectables.Bomb;
 import dungeonmania.entities.collectables.potions.Potion;
 import dungeonmania.entities.enemies.Enemy;
+import dungeonmania.entities.factories.EntityFactory;
 import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.goals.GoalComponent;
 import dungeonmania.map.GameMap;

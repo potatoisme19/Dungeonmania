@@ -97,7 +97,7 @@ public class GameMap {
         zts.forEach(e -> {
             game.register(() -> e.spawn(game), Game.AI_MOVEMENT, e.getId());
         });
-        game.register(() -> game.getEntityFactory().spawnSpider(game), Game.AI_MOVEMENT, "spawnSpiders");
+        game.register(() -> game.getEntityFactory().getSpiderFactory().spawn(game), Game.AI_MOVEMENT, "spawnSpiders");
     }
 
     /** Initialise and register "potion listeners" to be responsive to player potion updates */

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import dungeonmania.entities.Entity;
-import dungeonmania.entities.EntityFactory;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.buildables.Bow;
 import dungeonmania.entities.collectables.Arrow;
@@ -15,6 +14,7 @@ import dungeonmania.entities.collectables.Sword;
 import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.entities.collectables.Useable;
 import dungeonmania.entities.collectables.Wood;
+import dungeonmania.entities.factories.EntityFactory;
 
 /**
  * Represents the contents of the player's inventory, containing all their collected and crafted items.
@@ -75,7 +75,7 @@ public class Inventory {
                 items.remove(arrows.get(1));
                 items.remove(arrows.get(2));
             }
-            return factory.buildBow();
+            return factory.getBowFactory().build(null);
 
         } else if (wood.size() >= 2 && (treasure.size() >= 1 || keys.size() >= 1)) {
             if (remove) {
@@ -87,7 +87,7 @@ public class Inventory {
                     items.remove(keys.get(0));
                 }
             }
-            return factory.buildShield();
+            return factory.getShieldFactory().build(null);
         }
         return null;
     }
