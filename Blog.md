@@ -73,7 +73,7 @@ because i think getEntityFacotry() and getZombieFactory() both return factory an
 - I create MoveAway interface for the same reason. 
 - I created Destroy interface for the same reason. 
 
-[Merge Request 3](/put/links/here)
+[Merge Request 3](https://gitlab.cse.unsw.edu.au/coursework/COMP2511/26T1/students/z5606467/assignment-ii-part-1/-/merge_requests/7)
 <!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
 
 - I see that there is build logic in inventory for shield and bow. 
