@@ -85,21 +85,6 @@ because i think getEntityFacotry() and getZombieFactory() both return factory an
 
 > Similarly to your assignment-i blog, your blog entries for task 2 should be a **succinct** overview of your design decisions, and any choices you made. Try not to just recount what you did - instead, you should be telling us **_why_** you made those choices.
 
-[DELETE ONE OF THESE!]
-
-### [Option A]: Sun Stone & More Buildables (20 marks)
-
-[Links to your merge requests](/put/links/here)
-<!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
-
-**Design Decisions**
-
-[Briefly explain what design choices you made]
-
-**Assumptions/Other Notes**
-
-[Any other assumptions or notes]
-
 ### [Option B]: Logic Switches (30 marks)
 
 [Links to your merge requests](/put/links/here)
@@ -107,8 +92,46 @@ because i think getEntityFacotry() and getZombieFactory() both return factory an
 
 **Design Decisions**
 
-[Briefly explain what design choices you made]
+[*INTERFACE SEGREGATION*]
+1) Created Logical interface for entities that can be activated (Light Bulb, Switch Door, Logical Bomb)
+2) Created Conductor interface for entities that transmit current (Switch, Wire)
+3) Separate interfaces ensure entities only implement what they need, following Interface Segregation Principle
+
+[*OBSERVER PATTERN FOR CURRENT PROPAGATION*]
+1) Implemented Observer pattern to handle state changes efficiently without scanning all entities every tick
+2) ConductingSubject interface for entities that emit current (Switch, Wire)
+3) ConductingObserver interface for entities that react to current changes (Wire, Light Bulb, Switch Door, Logical Bomb)
+4) Enables propagation only through affected wires rather than BFS over entire map each tick
+
+[*STRATEGY PATTERN FOR LOGIC GATES*]
+1) Each logical entity has a LogicStrategy (AND, OR, XOR, CO_AND)
+2) Strategies are injected at entity creation based on JSON config
+3) Adding new logic types requires only creating new strategy class (Open-Closed Principle)
+
+[*FACTORY PATTERN FOR LOGICAL ENTITY CREATION*]
+1) Extended EntityFactory to create logical entities with appropriate logic strategies
+2) Bomb has two creation paths: MVP bomb (switch-activated) vs Logical bomb (logic-activated)
+
+[*STATE TRACKING FOR CO_AND*]
+1) Each conductor tracks activatedTick to know when it became active
+2) CO_AND logic checks that all adjacent conductors became active on the same tick
+3) Observer pattern naturally provides tick number with each notification
 
 **Assumptions/Other Notes**
 
-[Any other assumptions or notes]
+- Switches are considered conductors only when activated (boulder on top)
+- Wires are neutral conductors that propagate current but don't evaluate logic
+- Light bulbs and switch doors do not conduct current (as per spec)
+- Logical bombs are only created with logic field in config; without it, they behave as MVP bombs
+- Current propagation happens within the same tick before logical entity evaluation
+- Multiple switches can power the same wire without causing duplicate notifications
+- CO_AND requires all adjacent conductors to become active on the exact same tick number
+- Order of logical entity evaluation is undefined and does not affect outcomes
+- Regular doors and floor switches are unaffected by logical system
+
+[*EDGE CASES*]
+1) Wires with no adjacent power sources remain inactive
+2) Circular wire connections are prevented from infinite propagation
+3) Logical entities with no adjacent conductors are always inactive (except OR which requires at least one)
+4) CO_AND with only one adjacent conductor never activates
+5) Bombs with logic field explode only when condition met, not when picked up
