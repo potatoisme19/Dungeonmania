@@ -69,7 +69,7 @@ because i think getEntityFacotry() and getZombieFactory() both return factory an
 [Merge Request 2](/put/links/here)
 <!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
 
-[Briefly explain what design choices you made]
+- I created Overlappable interface so that it is no longer a part of entity since sometimes an entity will not implement it. 
 
 Add all other changes you made in the same format here:
 

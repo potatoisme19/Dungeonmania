@@ -3,6 +3,7 @@ package dungeonmania.entities.collectables.potions;
 import dungeonmania.Game;
 import dungeonmania.battles.BattleStatistics;
 import dungeonmania.entities.Entity;
+import dungeonmania.entities.Overlappable;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.collectables.BattleItem;
 import dungeonmania.entities.collectables.Useable;
@@ -10,7 +11,7 @@ import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
-public abstract class Potion extends InventoryItem implements Useable, BattleItem {
+public abstract class Potion extends InventoryItem implements Useable, BattleItem, Overlappable {
     private int duration;
 
     public Potion(Position position, int duration) {

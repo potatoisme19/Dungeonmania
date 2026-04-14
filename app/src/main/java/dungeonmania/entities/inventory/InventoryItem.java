@@ -18,9 +18,6 @@ public abstract class InventoryItem extends Entity {
     }
 
     @Override
-    public abstract void onOverlap(GameMap map, Entity entity);
-
-    @Override
     public void onMovedAway(GameMap map, Entity entity) {
         return;
     }
