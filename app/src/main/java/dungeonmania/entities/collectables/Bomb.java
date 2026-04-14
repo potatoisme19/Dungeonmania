@@ -12,6 +12,10 @@ import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.map.GameMap;
 
 public class Bomb extends InventoryItem implements Overlappable {
+
+    private boolean isLogical;
+    private String logicType;
+
     public enum State {
         SPAWNED, PLACED
     }
@@ -24,6 +28,18 @@ public class Bomb extends InventoryItem implements Overlappable {
         super(position);
         state = State.SPAWNED;
         this.radius = radius;
+        this.isLogical = false;
+    }
+
+    public Bomb(Position position, String logicType, int radius) {
+        super(position);
+        this.logicType = logicType;
+        this.radius = radius;
+        this.isLogical = true;
+    }
+
+    public boolean isLogical() {
+        return isLogical;
     }
 
     @Override

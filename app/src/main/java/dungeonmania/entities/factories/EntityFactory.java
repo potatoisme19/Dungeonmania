@@ -125,6 +125,16 @@ public class EntityFactory {
                 return swordFactory.build(pos);
             case "zombie_toast_spawner":
                 return zombieFactory.buildZombieToastSpawner(pos);
+            case "light_bulb_off":
+                String lightBulbLogic = jsonEntity.optString("logic", "and");
+                return staticEntityFactory.createLightBlub(pos, lightBulbLogic);
+
+            case "wire":
+                return staticEntityFactory.createWire(pos);
+
+            case "switch_door":
+                String switchDoorLogic = jsonEntity.optString("logic", "and");
+                return staticEntityFactory.createSwitchDoor(pos, switchDoorLogic);
             default:
                 throw new IllegalArgumentException("Unknown entity type: " + jsonEntity.getString("type"));
         }
