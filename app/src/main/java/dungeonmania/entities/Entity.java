@@ -72,9 +72,6 @@ public abstract class Entity {
         this.position = Position.translateBy(this.position, offset);
     }
 
-    /** Called whenever another entity moves away from this entity's position */
-    public abstract void onMovedAway(GameMap map, Entity entity);
-
     /** Called when this entity is destroyed (ie removed from the game map). */
     public abstract void onDestroy(GameMap gameMap);
 

@@ -186,11 +186,6 @@ public class Player extends Entity implements Battleable, Overlappable {
     }
 
     @Override
-    public void onMovedAway(GameMap map, Entity entity) {
-        return;
-    }
-
-    @Override
     public void onDestroy(GameMap gameMap) {
         return;
     }

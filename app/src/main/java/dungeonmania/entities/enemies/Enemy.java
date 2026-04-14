@@ -54,11 +54,6 @@ public abstract class Enemy extends Entity implements Battleable, Overlappable {
             map.getPlayer().removePotionListener(potionListener);
     }
 
-    @Override
-    public void onMovedAway(GameMap map, Entity entity) {
-        return;
-    }
-
     /**
      * Movement logic for the enemy.
      *
