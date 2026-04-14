@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.buildables.Bow;
+import dungeonmania.entities.buildables.BowStrategy;
+import dungeonmania.entities.buildables.CraftingStrategy;
+import dungeonmania.entities.buildables.ShieldStrategy;
 import dungeonmania.entities.collectables.Arrow;
 import dungeonmania.entities.collectables.BattleItem;
 import dungeonmania.entities.collectables.Key;
@@ -31,6 +34,19 @@ public class Inventory {
     /** Remove the given item from the inventory */
     public void remove(InventoryItem item) {
         items.remove(item);
+    }
+
+    public void removeFirst(Class<? extends InventoryItem> itemClass) {
+        InventoryItem item = getFirst(itemClass);
+        if (item != null) {
+            remove(item);
+        }
+    }
+
+    public void removeFirst(Class<? extends InventoryItem> itemClass, int count) {
+        for (int i = 0; i < count; i++) {
+            removeFirst(itemClass);
+        }
     }
 
     /** Get the list of possible buildables */
@@ -62,34 +78,36 @@ public class Inventory {
      * @param factory entity factory
      */
     public InventoryItem checkBuildCriteria(Player p, boolean remove, boolean forceShield, EntityFactory factory) {
+        List<CraftingStrategy> strategies = getCraftingStrategies();
 
-        List<Wood> wood = getEntities(Wood.class);
-        List<Arrow> arrows = getEntities(Arrow.class);
-        List<Treasure> treasure = getEntities(Treasure.class);
-        List<Key> keys = getEntities(Key.class);
+        for (CraftingStrategy strategy : strategies) {
+            if (strategy.canCraft(this)) {
+                if (forceShield && !(strategy instanceof ShieldStrategy)) {
+                    continue;
+                }
+                if (!forceShield && strategy instanceof ShieldStrategy && hasBowStrategy()) {
+                    continue;
+                }
 
-        if (wood.size() >= 1 && arrows.size() >= 3 && !forceShield) {
-            if (remove) {
-                items.remove(wood.get(0));
-                items.remove(arrows.get(0));
-                items.remove(arrows.get(1));
-                items.remove(arrows.get(2));
-            }
-            return factory.getBowFactory().build(null);
-
-        } else if (wood.size() >= 2 && (treasure.size() >= 1 || keys.size() >= 1)) {
-            if (remove) {
-                items.remove(wood.get(0));
-                items.remove(wood.get(1));
-                if (treasure.size() >= 1) {
-                    items.remove(treasure.get(0));
-                } else {
-                    items.remove(keys.get(0));
+                if (remove) {
+                    return strategy.craft(this, factory);
                 }
             }
-            return factory.getShieldFactory().build(null);
         }
         return null;
+    }
+
+    private List<CraftingStrategy> getCraftingStrategies() {
+        List<CraftingStrategy> strategies = new ArrayList<>();
+        strategies.add(new BowStrategy());
+        strategies.add(new ShieldStrategy());
+        return strategies;
+    }
+
+    private boolean hasBowStrategy() {
+        return getCraftingStrategies().stream()
+                .filter(s -> s instanceof BowStrategy)
+                .anyMatch(s -> s.canCraft(this));
     }
 
     /**
