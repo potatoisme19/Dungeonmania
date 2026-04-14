@@ -1,12 +1,13 @@
 package dungeonmania.entities.collectables;
 
 import dungeonmania.entities.Entity;
+import dungeonmania.entities.Overlappable;
 import dungeonmania.entities.Player;
 import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
-public class Wood extends InventoryItem {
+public class Wood extends InventoryItem implements Overlappable {
     public Wood(Position position) {
         super(position);
     }
