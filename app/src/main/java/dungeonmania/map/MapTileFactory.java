@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import dungeonmania.entities.EntityFactory;
+import dungeonmania.entities.factories.EntityFactory;
 
 /**
  * Factory that creates a MapTile from a JSON Object
@@ -30,8 +30,7 @@ public class MapTileFactory {
             "sword",
             "spider",
             "door",
-            "key"
-        );
+            "key");
 
     public static MapTile createEntity(JSONObject jsonEntity, EntityFactory factory) {
         return constructEntity(jsonEntity, factory);

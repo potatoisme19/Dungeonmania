@@ -16,6 +16,7 @@ import dungeonmania.entities.collectables.potions.InvisibilityPotion;
 import dungeonmania.entities.collectables.potions.Potion;
 import dungeonmania.entities.enemies.Enemy;
 import dungeonmania.entities.enemies.Mercenary;
+import dungeonmania.entities.factories.EntityFactory;
 import dungeonmania.entities.inventory.Inventory;
 import dungeonmania.entities.inventory.InventoryItem;
 import dungeonmania.map.GameMap;
