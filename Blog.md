@@ -57,10 +57,14 @@ I will use a composite pattern where the leaf nodes are the goals (exit, boulder
 
 ### d) Open Refactoring (12 marks)
 
-[Merge Request 1](/put/links/here)
-<!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
+[Merge Request 1](https://gitlab.cse.unsw.edu.au/coursework/COMP2511/26T1/students/z5606467/assignment-ii-part-1/-/merge_requests/5)
 
-[Briefly explain what design choices you made]
+- I separated Entity factory into individual factories to separate the logic because it made sense so them to have single responsibility. I let staticEntityFactory have more logic because it is all simple logic. 
+- in zombieToastSpawner.java i left 
+game.getEntityFactory().getZombieFactory().spawnZombie(game, this);
+
+because i think getEntityFacotry() and getZombieFactory() both return factory and there is no business logic behind it, so I allowed this chained dot. 
+- I created spawn and build interface so the individual factory can choose to implement one or both. 
 
 [Merge Request 2](/put/links/here)
 <!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
