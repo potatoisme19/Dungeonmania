@@ -73,10 +73,13 @@ because i think getEntityFacotry() and getZombieFactory() both return factory an
 - I create MoveAway interface for the same reason. 
 - I created Destroy interface for the same reason. 
 
-[Merge Request 3](/put/links/here)
+[Merge Request 3](https://gitlab.cse.unsw.edu.au/coursework/COMP2511/26T1/students/z5606467/assignment-ii-part-1/-/merge_requests/7)
 <!-- Make sure you actually merge your code into the main branch (Don't leave it as an open merge request)!! -->
 
-[explain here]
+- I see that there is build logic in inventory for shield and bow. 
+- I made a CraftingStrategy interface and added BowStrategy and ShieldStrategy to store the logic to craft these items. 
+- inventory will now directly use .craft 
+- this way the CraftingStrategies have single responsibility and other files wont need to handle this logic. 
 
 ## Task 2) Evolution of Requirements 🔧
 
