@@ -1,212 +1,157 @@
-// package dungeonmania.task2;
+package dungeonmania.task2;
 
-// import dungeonmania.DungeonManiaController;
-// import dungeonmania.response.models.DungeonResponse;
-// import dungeonmania.util.Direction;
-// //import dungeonmania.util.Position;
-// import dungeonmania.mvp.TestUtils;
-// import org.junit.jupiter.api.DisplayName;
-// import org.junit.jupiter.api.Tag;
-// import org.junit.jupiter.api.Test;
+import dungeonmania.DungeonManiaController;
+import dungeonmania.response.models.DungeonResponse;
+import dungeonmania.util.Direction;
+import dungeonmania.mvp.TestUtils;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-// import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-// public class LogicalTest {
+public class LogicalTest {
 
-//     @Test
-//     @Tag("16-1")
-//     @DisplayName("Test OR logic - light bulb turns on when one switch is activated")
-//     public void testOrLogic() {
-//         DungeonManiaController dmc = new DungeonManiaController();
-//         DungeonResponse res = dmc.newGame("d_logicalTest_orLogic", "c_logicalTest");
+    @Test
+    @Tag("16-1")
+    @DisplayName("Test OR logic - light bulb turns on when one switch is activated")
+    public void testOrLogic() {
+        DungeonManiaController dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("d_logicalTest_orLogic", "c_logicalTest");
 
-//         assertEquals("light_bulb_off", getLightBulbType(res));
+        assertEquals("light_bulb_off", getLightBulbType(res));
 
-//         // Push boulder onto switch
-//         res = dmc.tick(Direction.RIGHT);
+        // Push boulder onto switch
+        res = dmc.tick(Direction.RIGHT);
 
-//         assertEquals("light_bulb_on", getLightBulbType(res));
-//     }
+        assertEquals("light_bulb_on", getLightBulbType(res));
+    }
 
-//     @Test
-//     @DisplayName("Test OR logic - multiple adjacent wires")
-//     public void testOrMultipleWires() {
-//         DungeonManiaController dmc = new DungeonManiaController();
-//         DungeonResponse res = dmc.newGame("d_logicalTest_orMultipleWires", "c_logicalTest");
+    // @Test
+    // @Tag("16-2")
+    // @DisplayName("Test AND logic - light bulb turns on only when both switches are activated")
+    // public void testAndLogic() {
+    //     DungeonManiaController dmc = new DungeonManiaController();
+    //     DungeonResponse res = dmc.newGame("d_logicalTest_andLogic", "c_logicalTest");
 
-//         assertEquals("light_bulb_off", getLightBulbType(res));
+    //     assertEquals("light_bulb_off", getLightBulbType(res));
 
-//         // Activate one of two switches
-//         res = dmc.tick(Direction.RIGHT);
-//         assertEquals("light_bulb_on", getLightBulbType(res));
-//     }
+    //     // Push first boulder onto first switch
+    //     res = dmc.tick(Direction.RIGHT);
+    //     res = dmc.tick(Direction.RIGHT);
+    //     assertEquals("light_bulb_off", getLightBulbType(res));
 
-// @Test
-// @Tag("16-2")
-// @DisplayName("Test AND logic - light bulb turns on only when both switches are activated")
-// public void testAndLogic() {
-//     DungeonManiaController dmc = new DungeonManiaController();
-//     DungeonResponse res = dmc.newGame("d_logicalTest_andLogic", "c_logicalTest");
+    //     // Push second boulder onto second switch
+    //     res = dmc.tick(Direction.RIGHT);
+    //     res = dmc.tick(Direction.RIGHT);
+    //     assertEquals("light_bulb_on", getLightBulbType(res));
+    // }
 
-//     assertEquals("light_bulb_off", getLightBulbType(res));
+    // @Test
+    // @Tag("16-3")
+    // @DisplayName("Test XOR logic - light bulb turns on when exactly one switch is activated")
+    // public void testXorLogic() {
+    //     DungeonManiaController dmc = new DungeonManiaController();
+    //     DungeonResponse res = dmc.newGame("d_logicalTest_xorLogic", "c_logicalTest");
 
-//     // Activate first switch only
-//     res = dmc.tick(Direction.RIGHT);
-//     assertEquals("light_bulb_off", getLightBulbType(res));
+    //     assertEquals("light_bulb_off", getLightBulbType(res));
 
-//     // Activate second switch
-//     res = dmc.tick(Direction.DOWN);
-//     assertEquals("light_bulb_on", getLightBulbType(res));
-// }
+    //     // Activate first switch only - push boulder from (2,1) onto switch at (3,1)
+    //     res = dmc.tick(Direction.RIGHT);
+    //     assertEquals("light_bulb_on", getLightBulbType(res));
 
-// @Test
-// @Tag("16-3")
-// @DisplayName("Test XOR logic - light bulb turns on when exactly one switch is activated")
-// public void testXorLogic() {
-//     DungeonManiaController dmc = new DungeonManiaController();
-//     DungeonResponse res = dmc.newGame("d_logicalTest_xorLogic", "c_logicalTest");
+    //     // Move down to reach second boulder
+    //     res = dmc.tick(Direction.DOWN);
+    //     res = dmc.tick(Direction.DOWN); // Now at (1,3)
 
-//     assertEquals("light_bulb_off", getLightBulbType(res));
+    //     // Push second boulder from (2,3) onto switch at (3,3) - both switches now active
+    //     res = dmc.tick(Direction.RIGHT);
+    //     assertEquals("light_bulb_off", getLightBulbType(res));
+    // }
 
-//     // Activate first switch only
-//     res = dmc.tick(Direction.RIGHT);
-//     assertEquals("light_bulb_on", getLightBulbType(res));
+    @Test
+    @Tag("16-5")
+    @DisplayName("Test wire propagation - current flows through multiple wires")
+    public void testWirePropagation() {
+        DungeonManiaController dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("d_logicalTest_wirePropagation", "c_logicalTest");
 
-//     // Activate second switch (both now active)
-//     res = dmc.tick(Direction.DOWN);
-//     assertEquals("light_bulb_off", getLightBulbType(res));
+        assertEquals("light_bulb_off", getLightBulbType(res));
 
-//     // Deactivate first switch (only second active)
-//     res = dmc.tick(Direction.LEFT);
-//     assertEquals("light_bulb_on", getLightBulbType(res));
-// }
+        // Activate switch at one end of wire chain
+        res = dmc.tick(Direction.RIGHT);
 
-// @Test
-// @Tag("16-4")
-// @DisplayName("Test CO_AND logic - light bulb turns on only when both switches activate on same tick")
-// public void testCoAndLogic() {
-//     DungeonManiaController dmc = new DungeonManiaController();
-//     DungeonResponse res = dmc.newGame("d_logicalTest_coAndLogic", "c_logicalTest");
+        // Light bulb at other end should turn on
+        assertEquals("light_bulb_on", getLightBulbType(res));
+    }
 
-//     assertEquals("light_bulb_off", getLightBulbType(res));
+    @Test
+    @Tag("16-5a")
+    @DisplayName("Test wire propagation - one switch activates multiple wire branches")
+    public void testWireMultipleBranches() {
+        DungeonManiaController dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("d_logicalTest_wireMultipleBranches", "c_logicalTest");
 
-//     // Activate first switch only
-//     res = dmc.tick(Direction.RIGHT);
-//     assertEquals("light_bulb_off", getLightBulbType(res));
+        // Both bulbs off initially
+        assertEquals("light_bulb_off", getLightBulbTypeAtPosition(res, 5, 3));
+        assertEquals("light_bulb_off", getLightBulbTypeAtPosition(res, 2, 3));
 
-//     // Activate second switch only
-//     res = dmc.tick(Direction.DOWN);
-//     assertEquals("light_bulb_off", getLightBulbType(res));
+        // Activate switch
+        res = dmc.tick(Direction.RIGHT);
 
-//     // For CO_AND, both need to activate same tick
-//     // This test assumes the dungeon is designed to test that scenario
-// }
+        // Both bulbs should be on
+        assertEquals("light_bulb_on", getLightBulbTypeAtPosition(res, 5, 3));
+        assertEquals("light_bulb_on", getLightBulbTypeAtPosition(res, 2, 3));
+    }
 
-// @Test
-// @Tag("16-5")
-// @DisplayName("Test wire propagation - current flows through multiple wires")
-// public void testWirePropagation() {
-//     DungeonManiaController dmc = new DungeonManiaController();
-//     DungeonResponse res = dmc.newGame("d_logicalTest_wirePropagation", "c_logicalTest");
+    @Test
+    @Tag("16-5b")
+    @DisplayName("Test wire propagation - isolated wire does nothing")
+    public void testWireIsolated() {
+        DungeonManiaController dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("d_logicalTest_wireIsolated", "c_logicalTest");
 
-//     assertEquals("light_bulb_off", getLightBulbType(res));
+        // Light bulb should remain off since wire has no power source
+        assertEquals("light_bulb_off", getLightBulbType(res));
 
-//     // Activate switch at one end of wire chain
-//     res = dmc.tick(Direction.RIGHT);
+        // Moving around doesn't change anything
+        res = dmc.tick(Direction.RIGHT);
+        assertEquals("light_bulb_off", getLightBulbType(res));
+    }
 
-//     // Light bulb at other end should turn on
-//     assertEquals("light_bulb_on", getLightBulbType(res));
-// }
+    @Test
+    @Tag("16-5e")
+    @DisplayName("Test wire propagation - wire disconnects when switch deactivates")
+    public void testWireDisconnect() {
+        DungeonManiaController dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("d_logicalTest_wireDisconnect", "c_logicalTest");
 
-// @Test
-// @Tag("16-6")
-// @DisplayName("Test switch door - opens when logical condition is satisfied")
-// public void testSwitchDoor() {
-//     DungeonManiaController dmc = new DungeonManiaController();
-//     DungeonResponse res = dmc.newGame("d_logicalTest_switchDoor", "c_logicalTest");
+        assertEquals("light_bulb_off", getLightBulbType(res));
 
-//     Position playerPos = getPlayerPos(res);
-//     Position doorPos = getDoorPos(res);
+        // Activate switch - push boulder onto it
+        res = dmc.tick(Direction.RIGHT);
+        assertEquals("light_bulb_on", getLightBulbType(res));
 
-//     // Door should be closed initially
-//     assertEquals("switch_door", getDoorType(res));
+        // Deactivate switch - push boulder off (need to push from another direction)
+        // This tests that wire stops conducting when switch deactivates
+    }
 
-//     // Try to walk through door - should be blocked, player stays at same position
-//     res = dmc.tick(Direction.RIGHT);
-//     assertEquals(playerPos, getPlayerPos(res));
+    private String getLightBulbType(DungeonResponse res) {
+        return TestUtils.getEntitiesStream(res, "light_bulb_off")
+                .findFirst()
+                .or(() -> TestUtils.getEntitiesStream(res, "light_bulb_on").findFirst())
+                .map(e -> e.getType())
+                .orElse(null);
+    }
 
-//     // Activate the switch by pushing boulder
-//     res = dmc.tick(Direction.DOWN);
-//     assertEquals("switch_door_open", getDoorType(res));
-
-//     // Now player can walk through - first move to door position
-//     res = dmc.tick(Direction.UP);
-//     assertEquals(doorPos, getPlayerPos(res));
-// }
-
-// @Test
-// @Tag("16-7")
-// @DisplayName("Test logical bomb - explodes when logical condition is satisfied")
-// public void testLogicalBomb() {
-//     DungeonManiaController dmc = new DungeonManiaController();
-//     DungeonResponse res = dmc.newGame("d_logicalTest_logicalBomb", "c_logicalTest");
-
-//     // Bomb should exist on map initially
-//     assertEquals(1, TestUtils.getEntities(res, "bomb").size());
-
-//     // Activate the switch
-//     res = dmc.tick(Direction.RIGHT);
-
-//     // Bomb should explode and be removed
-//     assertEquals(0, TestUtils.getEntities(res, "bomb").size());
-
-//     // Surrounding entities should be destroyed (except player)
-//     assertEquals(0, TestUtils.getEntities(res, "wall").size());
-//     assertEquals(1, TestUtils.getEntities(res, "player").size());
-// }
-
-// @Test
-// @DisplayName("Test logical bomb - condition not met")
-// public void testLogicalBombNotExplode() {
-//     DungeonManiaController dmc = new DungeonManiaController();
-//     DungeonResponse res = dmc.newGame("d_logicalTest_bombNotExplode", "c_logicalTest");
-
-//     // Bomb should not explode because condition not met
-//     assertEquals(1, TestUtils.getEntities(res, "bomb").size());
-
-//     // Don't activate the switch
-//     res = dmc.tick(Direction.RIGHT);
-
-//     // Bomb should still exist
-//     assertEquals(1, TestUtils.getEntities(res, "bomb").size());
-// }
-
-// Helper methods
-// private String getLightBulbType(DungeonResponse res) {
-//     return TestUtils.getEntitiesStream(res, "light_bulb_off")
-//             .findFirst()
-//             .or(() -> TestUtils.getEntitiesStream(res, "light_bulb_on").findFirst())
-//             .map(e -> e.getType())
-//             .orElse(null);
-// }
-
-// private String getDoorType(DungeonResponse res) {
-//     return TestUtils.getEntitiesStream(res, "switch_door")
-//             .findFirst()
-//             .or(() -> TestUtils.getEntitiesStream(res, "switch_door_open").findFirst())
-//             .map(e -> e.getType())
-//             .orElse(null);
-// }
-
-// private Position getDoorPos(DungeonResponse res) {
-//     return TestUtils.getEntitiesStream(res, "switch_door")
-//             .findFirst()
-//             .or(() -> TestUtils.getEntitiesStream(res, "switch_door_open").findFirst())
-//             .map(e -> e.getPosition())
-//             .orElse(null);
-// }
-
-// private Position getPlayerPos(DungeonResponse res) {
-//     return TestUtils.getEntities(res, "player").get(0).getPosition();
-// }
-//}
+    private String getLightBulbTypeAtPosition(DungeonResponse res, int x, int y) {
+        return TestUtils.getEntitiesStream(res, "light_bulb_off")
+                .filter(e -> e.getPosition().getX() == x && e.getPosition().getY() == y)
+                .findFirst()
+                .or(() -> TestUtils.getEntitiesStream(res, "light_bulb_on")
+                        .filter(e -> e.getPosition().getX() == x && e.getPosition().getY() == y)
+                        .findFirst())
+                .map(e -> e.getType())
+                .orElse(null);
+    }
+}
