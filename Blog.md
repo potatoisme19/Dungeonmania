@@ -81,6 +81,11 @@ because i think getEntityFacotry() and getZombieFactory() both return factory an
 - inventory will now directly use .craft 
 - this way the CraftingStrategies have single responsibility and other files wont need to handle this logic. 
 
+[Merge Request 4]()
+
+- @Deprecated means the translate method is outdated and will be removed in later versions. New methods should not be using translate() anymore.
+- I updated Bomb.java and GameMap.java to use setPosition instead of translate. 
+
 ## Task 2) Evolution of Requirements 🔧
 
 > Similarly to your assignment-i blog, your blog entries for task 2 should be a **succinct** overview of your design decisions, and any choices you made. Try not to just recount what you did - instead, you should be telling us **_why_** you made those choices.
