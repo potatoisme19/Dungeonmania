@@ -2,6 +2,7 @@ package dungeonmania.entities.collectables;
 
 import dungeonmania.util.Position;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dungeonmania.entities.Entity;
@@ -85,14 +86,20 @@ public class Bomb extends InventoryItem implements Overlappable, Logical {
     }
 
     public void onPutDown(GameMap map, Position p) {
-        setPosition(Position.calculatePositionBetween(getPosition(), p));
+        setPosition(p);
         map.addEntity(this);
         this.state = State.PLACED;
-        List<Position> adjPosList = getPosition().getCardinallyAdjacentPositions();
-        adjPosList.stream().forEach(node -> {
-            List<Entity> entities = map.getEntities(node).stream().filter(Switch.class::isInstance).toList();
-            entities.stream().map(Switch.class::cast).forEach(s -> s.subscribe(this, map));
-        });
+        if (!isLogical) {
+            List<Position> adjPosList = new ArrayList<>(getPosition().getCardinallyAdjacentPositions());
+            for (Position node : adjPosList) {
+                List<Entity> entities = new ArrayList<>(map.getEntities(node));
+                for (Entity entity : entities) {
+                    if (entity instanceof Switch switchEntity) {
+                        switchEntity.subscribe(this, map);
+                    }
+                }
+            }
+        }
     }
 
     @Override
