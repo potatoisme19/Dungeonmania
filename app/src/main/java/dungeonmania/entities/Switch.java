@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dungeonmania.entities.collectables.Bomb;
+import dungeonmania.entities.logical.ConductingObserver;
+import dungeonmania.entities.logical.ConductingSubject;
+import dungeonmania.entities.logical.Conductor;
 import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
 
-public class Switch extends Entity implements Overlappable, MoveAway {
+public class Switch extends Entity implements Overlappable, MoveAway, Conductor, ConductingSubject {
     /** Whether this switch is activated (ie a boulder has been pushed on top of it) */
     private boolean activated;
     private List<Bomb> bombs = new ArrayList<>();
+    private boolean conducting;
+    private int activatedTick;
+    private List<ConductingObserver> observers = new ArrayList<>();
 
     public Switch(Position position) {
         super(position.asLayer(Entity.ITEM_LAYER));
@@ -37,7 +43,11 @@ public class Switch extends Entity implements Overlappable, MoveAway {
     public void onOverlap(GameMap map, Entity entity) {
         if (entity instanceof Boulder) {
             activated = true;
+            notifyObservers(true, map.getTick());
             activateBombs(map);
+            setConducting(true);
+            setActivatedTick(map.getTick());
+            map.updateLogicalEntities(map.getTick());
         }
     }
 
@@ -57,11 +67,53 @@ public class Switch extends Entity implements Overlappable, MoveAway {
     public void onMovedAway(GameMap map, Entity entity) {
         if (entity instanceof Boulder) {
             activated = false;
+            setConducting(false);
+            notifyObservers(false, map.getTick());
+            map.updateLogicalEntities(map.getTick());
         }
     }
 
     public boolean isActivated() {
         return activated;
+    }
+
+    @Override
+    public boolean isConducting() {
+        return activated;
+    }
+
+    @Override
+    public void setConducting(boolean conducting) {
+        this.conducting = conducting;
+    }
+
+    @Override
+    public int getActivatedTick() {
+        return activatedTick;
+    }
+
+    @Override
+    public void setActivatedTick(int tick) {
+        this.activatedTick = tick;
+    }
+
+    @Override
+    public void addObserver(ConductingObserver observer) {
+        if (!observers.contains(observer)) {
+            observers.add(observer);
+        }
+    }
+
+    @Override
+    public void removeObserver(ConductingObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers(boolean isConducting, int tick) {
+        for (ConductingObserver observer : observers) {
+            observer.onConductingStateChange(isConducting, tick);
+        }
     }
 
 }

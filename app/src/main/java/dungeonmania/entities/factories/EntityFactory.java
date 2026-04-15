@@ -116,7 +116,12 @@ public class EntityFactory {
             case "portal":
                 return staticEntityFactory.createPortal(pos, jsonEntity.getString("colour"));
             case "bomb":
-                return bombFactory.build(pos);
+                if (jsonEntity.has("logic")) {
+                    String bombLogic = jsonEntity.getString("logic");
+                    return bombFactory.buildLogical(pos, bombLogic);
+                } else {
+                    return bombFactory.build(pos);
+                }
             case "invisibility_potion":
                 return invisibilityPotionFactory.build(pos);
             case "invincibility_potion":
@@ -125,6 +130,16 @@ public class EntityFactory {
                 return swordFactory.build(pos);
             case "zombie_toast_spawner":
                 return zombieFactory.buildZombieToastSpawner(pos);
+            case "light_bulb_off":
+                String lightBulbLogic = jsonEntity.optString("logic", "and");
+                return staticEntityFactory.createLightBulb(pos, lightBulbLogic);
+
+            case "wire":
+                return staticEntityFactory.createWire(pos);
+
+            case "switch_door":
+                String switchDoorLogic = jsonEntity.optString("logic", "and");
+                return staticEntityFactory.createSwitchDoor(pos, switchDoorLogic);
             default:
                 throw new IllegalArgumentException("Unknown entity type: " + jsonEntity.getString("type"));
         }

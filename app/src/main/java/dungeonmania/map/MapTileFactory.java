@@ -30,7 +30,10 @@ public class MapTileFactory {
             "sword",
             "spider",
             "door",
-            "key");
+            "key",
+            "light_bulb_off",
+            "wire",
+            "switch_door");
 
     public static MapTile createEntity(JSONObject jsonEntity, EntityFactory factory) {
         return constructEntity(jsonEntity, factory);

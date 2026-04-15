@@ -15,6 +15,9 @@ import dungeonmania.entities.collectables.Arrow;
 import dungeonmania.entities.collectables.Key;
 import dungeonmania.entities.collectables.Treasure;
 import dungeonmania.entities.collectables.Wood;
+import dungeonmania.entities.logical.LightBulb;
+import dungeonmania.entities.logical.SwitchDoor;
+import dungeonmania.entities.logical.Wire;
 import dungeonmania.util.Position;
 
 public class StaticEntityFactory implements BuildFactory {
@@ -68,5 +71,17 @@ public class StaticEntityFactory implements BuildFactory {
 
     public Portal createPortal(Position pos, String color) {
         return new Portal(pos, ColorCodedType.valueOf(color));
+    }
+
+    public LightBulb createLightBulb(Position pos, String logicType) {
+        return new LightBulb(pos, logicType);
+    }
+
+    public Wire createWire(Position pos) {
+        return new Wire(pos);
+    }
+
+    public SwitchDoor createSwitchDoor(Position pos, String logicType) {
+        return new SwitchDoor(pos, logicType);
     }
 }
