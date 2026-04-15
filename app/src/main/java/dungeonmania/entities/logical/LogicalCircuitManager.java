@@ -106,15 +106,5 @@ public class LogicalCircuitManager {
                 }
             }
         }
-
-        for (Logical logical : getAllLogicalEntities()) {
-            if (logical instanceof Entity entity) {
-                for (Entity adjacent : getAdjacentConductors(entity)) {
-                    if (adjacent instanceof ConductingSubject) {
-                        ((ConductingSubject) adjacent).addObserver((ConductingObserver) logical);
-                    }
-                }
-            }
-        }
     }
 }
