@@ -18,4 +18,9 @@ public class BombFactory implements BuildFactory {
         int bombRadius = config.optInt("bomb_radius", Bomb.DEFAULT_RADIUS);
         return new Bomb(pos, bombRadius);
     }
+
+    public Bomb buildLogical(Position pos, String logicType) {
+        int bombRadius = config.optInt("bomb_radius", Bomb.DEFAULT_RADIUS);
+        return new Bomb(pos, logicType, bombRadius);
+    }
 }

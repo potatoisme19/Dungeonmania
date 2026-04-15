@@ -1,39 +1,52 @@
 package dungeonmania.entities.logical;
 
-import java.util.List;
-
 import dungeonmania.entities.Entity;
 import dungeonmania.entities.logical.strategies.LogicStrategy;
+import dungeonmania.entities.logical.strategies.LogicStrategyFactory;
+import dungeonmania.map.GameMap;
 import dungeonmania.util.Position;
+import java.util.List;
 
 public class SwitchDoor extends Entity implements Logical {
+    private boolean activated;
+    private boolean open;
+    private LogicStrategy logicStrategy;
 
-    public SwitchDoor(Position position) {
+    public SwitchDoor(Position position, String logicType) {
         super(position);
-    }
-
-    @Override
-    public LogicStrategy getLogicStrategy() {
-        // TODO Auto-generated method stub
-        return null;
+        this.activated = false;
+        this.open = false;
+        this.logicStrategy = LogicStrategyFactory.createStrategy(logicType);
     }
 
     @Override
     public boolean isActivated() {
-        // TODO Auto-generated method stub
-        return false;
+        return activated;
     }
 
     @Override
     public void setActivated(boolean activated) {
-        // TODO Auto-generated method stub
+        this.activated = activated;
+        this.open = activated;
+    }
 
+    @Override
+    public LogicStrategy getLogicStrategy() {
+        return logicStrategy;
     }
 
     @Override
     public void updateActivation(List<Conductor> adjacentConductors, int currentTick) {
-        // TODO Auto-generated method stub
-
+        boolean shouldBeActivated = logicStrategy.evaluate(adjacentConductors, currentTick);
+        setActivated(shouldBeActivated);
     }
 
+    @Override
+    public boolean canMoveOnto(GameMap map, Entity entity) {
+        return open;
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
 }

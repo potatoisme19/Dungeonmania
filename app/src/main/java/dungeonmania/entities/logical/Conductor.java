@@ -1,8 +1,5 @@
 package dungeonmania.entities.logical;
 
-import dungeonmania.util.Position;
-import java.util.List;
-
 public interface Conductor {
     boolean isConducting();
 
@@ -12,7 +9,4 @@ public interface Conductor {
 
     void setActivatedTick(int tick);
 
-    List<Position> getAdjacentConductors();
-
-    List<Position> getAdjacentLogicalEntities();
 }

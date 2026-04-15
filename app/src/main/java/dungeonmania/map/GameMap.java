@@ -20,6 +20,7 @@ import dungeonmania.entities.Switch;
 import dungeonmania.entities.collectables.Bomb;
 import dungeonmania.entities.enemies.Enemy;
 import dungeonmania.entities.enemies.ZombieToastSpawner;
+import dungeonmania.entities.logical.LogicalCircuitManager;
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
 
@@ -38,6 +39,8 @@ public class GameMap {
     private Game game;
     /** Reference to the game's player. */
     private Player player;
+    /** reference to logical circuit methods */
+    private LogicalCircuitManager circuitManager;
 
     /**
      * Initialise the game map
@@ -53,6 +56,7 @@ public class GameMap {
         initRegisterSpawners();
         initRegisterBombsAndSwitches();
         initPotionListeners();
+        initLogicalCircuit();
     }
 
     /** Subscribe bombs and switches to each other */
@@ -270,7 +274,31 @@ public class GameMap {
      * The entity's position on the map is determined based on its `getPosition` method.
      */
     public void addEntity(Entity entity) {
+        if (entity instanceof Bomb bomb && bomb.isLogical()) {
+            bomb.setGameMap(this);
+        }
         addNode(new MapTile(entity));
+    }
+
+    public GameMap() {
+        this.circuitManager = new LogicalCircuitManager(this);
+    }
+
+    public LogicalCircuitManager getCircuitManager() {
+        return circuitManager;
+    }
+
+    // Delegate methods (optional - for convenience)
+    public void updateLogicalEntities(int currentTick) {
+        circuitManager.updateLogicalEntities(currentTick);
+    }
+
+    public void initLogicalCircuit() {
+        circuitManager.initObserverNetwork();
+    }
+
+    public List<Entity> getAdjacentConductors(Entity entity) {
+        return circuitManager.getAdjacentConductors(entity);
     }
 
     /**
@@ -350,5 +378,9 @@ public class GameMap {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public int getTick() {
+        return game.getTick();
     }
 }

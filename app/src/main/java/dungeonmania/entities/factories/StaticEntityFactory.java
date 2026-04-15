@@ -73,8 +73,8 @@ public class StaticEntityFactory implements BuildFactory {
         return new Portal(pos, ColorCodedType.valueOf(color));
     }
 
-    public LightBulb createLightBlub(Position pos, String logicType) {
-        return new LightBulb(pos);
+    public LightBulb createLightBulb(Position pos, String logicType) {
+        return new LightBulb(pos, logicType);
     }
 
     public Wire createWire(Position pos) {
@@ -82,6 +82,6 @@ public class StaticEntityFactory implements BuildFactory {
     }
 
     public SwitchDoor createSwitchDoor(Position pos, String logicType) {
-        return new SwitchDoor(pos);
+        return new SwitchDoor(pos, logicType);
     }
 }
