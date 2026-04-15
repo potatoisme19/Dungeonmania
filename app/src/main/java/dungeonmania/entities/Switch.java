@@ -79,7 +79,7 @@ public class Switch extends Entity implements Overlappable, MoveAway, Conductor,
 
     @Override
     public boolean isConducting() {
-        return activated && conducting;
+        return activated;
     }
 
     @Override
