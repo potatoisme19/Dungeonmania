@@ -159,6 +159,69 @@ public class LogicalTest {
     // }
 
     @Test
+    @Tag("16-4")
+    @DisplayName("CO_AND - only one switch active")
+    public void testCoAndOneSwitch() {
+        DungeonManiaController dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("d_logicalTest_coAndOneSwitch", "c_logicalTest");
+
+        assertEquals("light_bulb_off", getLightBulbType(res));
+
+        // Activate the only switch
+        res = dmc.tick(Direction.RIGHT);
+
+        // CO_AND requires at least 2 adjacent conductors, so should remain OFF
+        assertEquals("light_bulb_off", getLightBulbType(res));
+    }
+
+    @Test
+    @DisplayName("CO_AND - no adjacent conductors")
+    public void testCoAndNoConductor() {
+        DungeonManiaController dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("d_logicalTest_coAndNoConductor", "c_logicalTest");
+
+        // No switches or wires adjacent to bulb
+        assertEquals("light_bulb_off", getLightBulbType(res));
+
+        // Moving around doesn't change anything
+        res = dmc.tick(Direction.RIGHT);
+        assertEquals("light_bulb_off", getLightBulbType(res));
+    }
+
+    @Test
+    @DisplayName("CO_AND - both switches active but different ticks")
+    public void testCoAndDiffTicks() {
+        DungeonManiaController dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("d_logicalTest_coAndDiffTicks", "c_logicalTest");
+
+        assertEquals("light_bulb_off", getLightBulbType(res));
+
+        // Activate first switch
+        res = dmc.tick(Direction.RIGHT);
+        assertEquals("light_bulb_off", getLightBulbType(res));
+
+        // Move to second boulder
+        res = dmc.tick(Direction.DOWN);
+        res = dmc.tick(Direction.DOWN);
+
+        // Activate second switch on different tick
+        res = dmc.tick(Direction.RIGHT);
+
+        // CO_AND requires same tick, so should remain OFF
+        assertEquals("light_bulb_off", getLightBulbType(res));
+    }
+
+    @Test
+    @DisplayName("CO_AND - both switches activate same tick")
+    public void testCoAndSameTick() {
+        DungeonManiaController dmc = new DungeonManiaController();
+        DungeonResponse res = dmc.newGame("d_logicalTest_coAndSameTick", "c_logicalTest");
+
+        assertEquals("light_bulb_off", getLightBulbType(res));
+
+    }
+
+    @Test
     @Tag("16-5")
     @DisplayName("Test wire propagation - current flows through multiple wires")
     public void testWirePropagation() {
