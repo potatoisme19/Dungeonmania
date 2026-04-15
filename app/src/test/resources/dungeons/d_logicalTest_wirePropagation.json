@@ -6,44 +6,39 @@
             "y": 1
         },
         {
-            "type": "switch",
-            "x": 6,
-            "y": 1
-        },
-        {
             "type": "boulder",
-            "x": 7,
+            "x": 2,
             "y": 1
         },
         {
-            "type": "wire",
-            "x": 5,
-            "y": 1
-        },
-        {
-            "type": "wire",
-            "x": 4,
-            "y": 1
-        },
-        {
-            "type": "wire",
+            "type": "switch",
             "x": 3,
             "y": 1
         },
         {
             "type": "wire",
-            "x": 2,
-            "y": 1
+            "x": 3,
+            "y": 2
+        },
+        {
+            "type": "wire",
+            "x": 3,
+            "y": 3
+        },
+        {
+            "type": "wire",
+            "x": 3,
+            "y": 4
         },
         {
             "type": "light_bulb_off",
-            "x": 2,
-            "y": 2,
+            "x": 3,
+            "y": 5,
             "logic": "or"
         },
         {
             "type": "exit",
-            "x": 8,
+            "x": 5,
             "y": 1
         }
     ],

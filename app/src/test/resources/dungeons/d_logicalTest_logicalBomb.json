@@ -6,13 +6,13 @@
             "y": 1
         },
         {
-            "type": "switch",
-            "x": 3,
+            "type": "boulder",
+            "x": 2,
             "y": 1
         },
         {
-            "type": "boulder",
-            "x": 4,
+            "type": "switch",
+            "x": 3,
             "y": 1
         },
         {
@@ -24,8 +24,7 @@
             "type": "bomb",
             "x": 2,
             "y": 2,
-            "logic": "or",
-            "bomb_radius": 2
+            "logic": "or"
         },
         {
             "type": "wall",
@@ -36,11 +35,6 @@
             "type": "wall",
             "x": 3,
             "y": 2
-        },
-        {
-            "type": "wall",
-            "x": 2,
-            "y": 3
         },
         {
             "type": "exit",

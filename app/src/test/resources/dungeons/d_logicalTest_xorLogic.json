@@ -6,23 +6,23 @@
             "y": 1
         },
         {
+            "type": "boulder",
+            "x": 2,
+            "y": 1
+        },
+        {
             "type": "switch",
             "x": 3,
             "y": 1
         },
         {
             "type": "boulder",
-            "x": 4,
-            "y": 1
-        },
-        {
-            "type": "switch",
-            "x": 3,
+            "x": 2,
             "y": 3
         },
         {
-            "type": "boulder",
-            "x": 4,
+            "type": "switch",
+            "x": 3,
             "y": 3
         },
         {
@@ -45,16 +45,6 @@
             "x": 1,
             "y": 2,
             "logic": "xor"
-        },
-        {
-            "type": "wall",
-            "x": 1,
-            "y": 1
-        },
-        {
-            "type": "wall",
-            "x": 1,
-            "y": 3
         },
         {
             "type": "exit",

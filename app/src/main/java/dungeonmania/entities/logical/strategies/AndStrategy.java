@@ -8,7 +8,7 @@ public class AndStrategy implements LogicStrategy {
 
     @Override
     public boolean evaluate(List<Conductor> adjacentConductors, int currentTick) {
-        if (adjacentConductors.size() < 2) {
+        if (adjacentConductors.isEmpty()) {
             return false;
         }
         return adjacentConductors

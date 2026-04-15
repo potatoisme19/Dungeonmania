@@ -111,6 +111,9 @@ public class Bomb extends InventoryItem implements Overlappable, Logical {
             return;
         hasExploded = true;
 
+        if (gameMap == null)
+            return;
+
         Position pos = getPosition();
         for (int x = pos.getX() - radius; x <= pos.getX() + radius; x++) {
             for (int y = pos.getY() - radius; y <= pos.getY() + radius; y++) {

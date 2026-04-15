@@ -8,9 +8,8 @@ public class OrStrategy implements LogicStrategy {
 
     @Override
     public boolean evaluate(List<Conductor> adjacentConductors, int currentTick) {
-        return adjacentConductors
-                .stream()
-                .anyMatch(Conductor::isConducting);
+        boolean result = adjacentConductors.stream().anyMatch(Conductor::isConducting);
+        return result;
     }
 
     @Override

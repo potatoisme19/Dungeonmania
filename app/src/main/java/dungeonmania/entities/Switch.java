@@ -45,6 +45,7 @@ public class Switch extends Entity implements Overlappable, MoveAway, Conductor,
             activated = true;
             notifyObservers(true, map.getTick());
             activateBombs(map);
+            setConducting(true);
             setActivatedTick(map.getTick());
             map.updateLogicalEntities(map.getTick());
         }
@@ -66,6 +67,7 @@ public class Switch extends Entity implements Overlappable, MoveAway, Conductor,
     public void onMovedAway(GameMap map, Entity entity) {
         if (entity instanceof Boulder) {
             activated = false;
+            setConducting(false);
             notifyObservers(false, map.getTick());
             map.updateLogicalEntities(map.getTick());
         }
